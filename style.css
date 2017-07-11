@@ -1,0 +1,13 @@
+.tags_select {
+  position:fixed;
+  top:50%;
+  left:50%; 
+  margin-left:-180px;
+  margin-top:-90px;
+  border:1px solid #69b401; 
+  padding:5px;
+  background-color: rgba(231, 76, 60,1.0);
+}
+.hidden {
+    display: none;
+}
