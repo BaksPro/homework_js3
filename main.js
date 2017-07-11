@@ -18,7 +18,7 @@
                 filter_post();
                 add_seach();
                 lazy_load_event();
-                
+                delete_post_event();
                           
             });
         })
@@ -28,7 +28,7 @@
        
       show_tags_list(); 
       submit();
-      
+     
       
       
 } ;
@@ -96,6 +96,7 @@ function show_post(value) {
         post_div.appendChild(p);
         post_div.appendChild(span);
         post_div.appendChild(ul);
+        button.classList.add("remove-button");
         post_div.appendChild(button);
         post_div.classList.add("delete");
         post_container.appendChild(post_div); 
@@ -256,6 +257,7 @@ function seach(event) {
             div.innerHTML = "";
              show_post(s);
         }
+            delete_post_event();
     }
 
 
@@ -289,18 +291,22 @@ function lazy_load_event() {
 }    
 
 function delete_post(event){
-    event.preventDefault();
-    let elem = document.querySelector(".delete button");
-    elem.parentElement.remove();
-    refresh_post();
+    
+   
+    
+    if (!event.target.classList.contains('remove-button')) return;
+        event.target.parentElement.remove();
+        refresh_post();
 
 }
 
 function delete_post_event(){
-    window.addEventListener("click", delete_post);
+     let elem = document.querySelector(".scroll");    
+    
+     elem.addEventListener("click", delete_post);
 }
   
-delete_post_event();    
+   
 
 
 
@@ -316,3 +322,6 @@ function refresh_post(){
 
 }
 
+ 
+
+  
