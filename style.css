@@ -11,3 +11,23 @@
 .hidden {
     display: none;
 }
+
+.delete button{
+      content: "Удалить!"; /* Добавляемый текст */ 
+      color: #333; /* Цвет текста */ 
+      background-color: #fc0; /* Цвет фона */ 
+      font-size: 90%; /* Размер шрифта */ 
+      padding: 2px; /* Поля вокруг текста */ 
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      z-index: 99999;
+    
+}
+
+.delete {
+  position: relative;
+  border: 3px solid #faa;
+  padding: 10px 20px;
+  margin: 10px 20px;
+}

@@ -18,6 +18,7 @@
                 filter_post();
                 add_seach();
                 lazy_load_event();
+                
                           
             });
         })
@@ -67,6 +68,7 @@ function show_post(value) {
         let span = document.createElement("span");
         let p = document.createElement("p");
         let ul = document.createElement("ul");
+        let button = document.createElement("button");
         
         if( i > 9){
             post_div.classList.add("hidden");
@@ -78,7 +80,7 @@ function show_post(value) {
                 ul.appendChild(li);
             }
             
-
+        button.innerHTML = "Удалить";
         h3.innerHTML = value[i].title;
         img.src = value[i].image;
         p.innerHTML = value[i].description;
@@ -87,13 +89,14 @@ function show_post(value) {
         date_creat.setTime(Date.parse(value[i].createdAt));
         
 
-        span.innerHTML = date_creat.toLocaleString("ru");
+        span.innerHTML = ` Дата : ${date_creat.toLocaleString("ru")}`;
 
         post_div.appendChild(h3);
         post_div.appendChild(img);
         post_div.appendChild(p);
         post_div.appendChild(span);
         post_div.appendChild(ul);
+        post_div.appendChild(button);
         post_div.classList.add("delete");
         post_container.appendChild(post_div); 
      
@@ -247,7 +250,8 @@ function seach(event) {
             
         if(localStorage.getItem("tags")){
             div.innerHTML = "";
-             show_post(c);
+            c.length > 0 ? show_post(c): div.innerHTML = "Ничего не найдено"
+            // show_post(c);
         } else {
             div.innerHTML = "";
              show_post(s);
@@ -261,7 +265,7 @@ function lazy_load(){
       let elem = document.querySelectorAll("#container .hidden");
           console.log(elem);
            
-        if (window.pageYOffset >= document.documentElement.scrollHeight - 1000){
+        if (window.pageYOffset >= document.body.scrollHeight -  window.innerHeight){
              console.log(window.pageYOffset) ;
            console.log(document.documentElement.scrollHeight) ;
             for( let i = 0; i < 10; i++){
@@ -283,4 +287,32 @@ function lazy_load_event() {
         
 
 }    
+
+function delete_post(event){
+    event.preventDefault();
+    let elem = document.querySelector(".delete button");
+    elem.parentElement.remove();
+    refresh_post();
+
+}
+
+function delete_post_event(){
+    window.addEventListener("click", delete_post);
+}
   
+delete_post_event();    
+
+
+
+function refresh_post(){
+    let elem_hidden = document.querySelectorAll("#container .hidden");
+    let elem_show = document.querySelectorAll("#container .delete");
+    
+    if(elem_show.length - elem_hidden.length < 10 ) {
+        for( let i = elem_show.length - elem_hidden.length; i < 10; i++){
+                elem_hidden[i].classList.toggle("hidden");
+        }  
+    }
+
+}
+
