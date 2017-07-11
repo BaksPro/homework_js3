@@ -17,6 +17,7 @@
                 sort_posts(post);
                 filter_post();
                 add_seach();
+                lazy_load_event();
                           
             });
         })
@@ -26,7 +27,7 @@
        
       show_tags_list(); 
       submit();
-      lazy_load_event();
+      
       
       
 } ;
@@ -97,6 +98,7 @@ function show_post(value) {
         post_container.appendChild(post_div); 
      
      }
+    post_container.classList.add("scroll");
     div.appendChild(post_container);  
     
       
@@ -254,29 +256,31 @@ function seach(event) {
 
 
 function lazy_load(){
-      let container = document.getElementById("container");
-      let elem = document.querySelectorAll(".hidden");
-           console.log(window.pageYOffset) 
-           console.log(document.documentElement.scrollHeight) 
-
-        if (window.pageYOffset >= document.documentElement.scrollHeight - 800 ){
-            
+    
+     
+      let elem = document.querySelectorAll("#container .hidden");
+          console.log(elem);
+           
+        if (window.pageYOffset >= document.documentElement.scrollHeight - 1000){
+             console.log(window.pageYOffset) ;
+           console.log(document.documentElement.scrollHeight) ;
             for( let i = 0; i < 10; i++){
                 console.log(elem[i].classList.toggle("hidden"));
             }          
    
-       }
-}
+
+        }
+ 
+    }
+
 
 
 
 function lazy_load_event() {
     
-    let container = document.getElementById("container");
-    container.addEventListener("scroll", lazy_load);
+    
+    window.addEventListener("scroll", lazy_load);
+        
 
-};    
+}    
   
-
-
- 
