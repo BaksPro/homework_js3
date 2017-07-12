@@ -264,7 +264,9 @@ function seach(event) {
             div.innerHTML = "";
              show_post(s);
         }
-            delete_post_event()
+            delete_post_event();
+            post_stats()
+            
     }
 
 
@@ -283,6 +285,7 @@ function lazy_load(){
    
 
         }
+        post_stats()
  
     }
 
@@ -304,6 +307,7 @@ function delete_post(event){
     if (!event.target.classList.contains('remove-button')) return;
         event.target.parentElement.remove();
         refresh_post();
+        post_stats()
 
 }
 
@@ -331,13 +335,13 @@ function refresh_post(){
 
 
 function post_stats(){
-      let div = document.getElementById("container");
-      let post_stats = document.createElement("span");
+      let div = document.getElementById("stats");   
       let elem_hidden = document.querySelectorAll("#container .hidden");
       let elem_show = document.querySelectorAll("#container .delete");
-      post_stats.innerHTML = `Количество постов : ${elem_show.length}
+     
+       
+        div.innerHTML = `Количество постов : ${elem_show.length}
         Показано : ${elem_show.length - elem_hidden.length}`;
-        div.appendChild(post_stats);
 }
  
 
