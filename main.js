@@ -19,6 +19,7 @@
                 add_seach();
                 lazy_load_event();
                 delete_post_event();
+                post_stats();
                           
             });
         })
@@ -28,6 +29,7 @@
        
       show_tags_list(); 
       submit();
+      
      
       
       
@@ -70,6 +72,7 @@ function show_post(value) {
         let ul = document.createElement("ul");
         let button = document.createElement("button");
         
+        
         if( i > 9){
             post_div.classList.add("hidden");
         }
@@ -90,7 +93,7 @@ function show_post(value) {
         
 
         span.innerHTML = ` Дата : ${date_creat.toLocaleString("ru")}`;
-
+       
         post_div.appendChild(h3);
         post_div.appendChild(img);
         post_div.appendChild(p);
@@ -102,8 +105,12 @@ function show_post(value) {
         post_container.appendChild(post_div); 
      
      }
-    post_container.classList.add("scroll");
+
+    // let elem_show = document.querySelectorAll("#container .delete");
+      
+    post_container.classList.add("scroll");    
     div.appendChild(post_container);  
+    
     
       
 }        
@@ -257,7 +264,7 @@ function seach(event) {
             div.innerHTML = "";
              show_post(s);
         }
-            delete_post_event();
+            delete_post_event()
     }
 
 
@@ -322,6 +329,15 @@ function refresh_post(){
 
 }
 
+
+function post_stats(){
+      let div = document.getElementById("container");
+      let post_stats = document.createElement("span");
+      let elem_hidden = document.querySelectorAll("#container .hidden");
+      let elem_show = document.querySelectorAll("#container .delete");
+      post_stats.innerHTML = `Количество постов : ${elem_show.length}
+        Показано : ${elem_show.length - elem_hidden.length}`;
+        div.appendChild(post_stats);
+}
  
 
-  
