@@ -259,13 +259,14 @@ function seach(event) {
         if(localStorage.getItem("tags")){
             div.innerHTML = "";
             c.length > 0 ? show_post(c): div.innerHTML = "Ничего не найдено"
-            // show_post(c);
+            post_stats();
         } else {
             div.innerHTML = "";
              show_post(s);
+             post_stats();
         }
             delete_post_event();
-            post_stats()
+           
             
     }
 
