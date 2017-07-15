@@ -157,13 +157,23 @@ function sort_by_tags() {
         let arr_default = [];
         let arr_tags = [];
         tags_list =  JSON.parse(localStorage.tags);
-
+        let tagsLength = tags_list.length;
+        
+      
        post.forEach(function(element) {
-           if(element.tags.includes(...tags_list)) {
-              arr_tags.push(element) 
+        let count = 0;
+        for( let i = 0; i < element.tags.length; i++ ){
+            if(tags_list.includes(element.tags[i])){
+               console.log( count +=1);
+            }            
+        }
+        
+         if(tagsLength == count ) {
+            console.log(element.tags);
+              arr_tags.push(element);
            } else {
             arr_default.push(element);
-           }
+           } 
             
         });
 
@@ -186,39 +196,7 @@ function filter_post(){
 }
 
 
-/*
-function seach(event) {
-     let div = document.getElementById("container");
-     let input_value = document.getElementById("search").value;
-        if(input_value.length === 0 ){
-            div.innerHTML = "";
-             filter_post();
-        } 
-      
-         
-        function seach_filter(item) {
-            let str_tags = item.title.toLowerCase();
-            let str_input = input_value.toLowerCase();
 
-            return str_tags.includes(str_input);
-        }
-        let c = sort_by_tags().filter(seach_filter);
-        let s = post.filter(seach_filter);
-        
-            
-        if(localStorage.getItem("tags")){
-            div.innerHTML = "";
-             show_post(c);
-             console.log(c);
-             
-        } else {
-            div.innerHTML = "";
-             show_post(s);
-             console.log(s);
-        }
-    
-}
-*/
 
 
 
@@ -252,9 +230,9 @@ function seach(event) {
          
        
         let c = sort_by_tags().filter(seach_filter);
-        console.log(c);
+       
         let s = post.filter(seach_filter);
-        console.log(s);
+        
             
         if(localStorage.getItem("tags")){
             div.innerHTML = "";
@@ -275,13 +253,13 @@ function lazy_load(){
     
      
       let elem = document.querySelectorAll("#container .hidden");
-          console.log(elem);
+         
            
         if (window.pageYOffset >= document.body.scrollHeight -  window.innerHeight){
-             console.log(window.pageYOffset) ;
-           console.log(document.documentElement.scrollHeight) ;
+           
+           document.documentElement.scrollHeight
             for( let i = 0; i < 10; i++){
-                console.log(elem[i].classList.toggle("hidden"));
+                elem[i].classList.toggle("hidden");
             }          
    
 
